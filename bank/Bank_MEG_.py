@@ -9,7 +9,7 @@ var_global_conta = 9999
 enter = str()
 
 print("-------------------------")
-print("BEM VINDO AO BANK OF MEG: ")
+print("BEM VINDO AO BANK OF MEG ")
 print("-------------------------")
 print("SELECIONE UMA DAS OPÇÕES: ")
 print("-------------------------")
