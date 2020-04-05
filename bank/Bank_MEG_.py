@@ -1,4 +1,5 @@
 import random
+opcao = int()
 nome = str()
 cpf = int() 
 saldo = float()
@@ -11,6 +12,9 @@ agencia_destino = int()
 conta_destino = int()
 digito_destino = int()
 valor_transferido = float()
+num_boleto = int()
+cedente = str()
+valor_boleto = float()
 
 print("-------------------------")
 print("BEM VINDO AO BANK OF MEG ")
@@ -76,6 +80,7 @@ while opcao != 0:
         print("-------------------------")
         print("OPÇÃO: ")
         opcao = int(input())
+        
          
     if opcao == 3:
         print("OPÇÃO SELECIONADA: 3")
@@ -128,7 +133,56 @@ while opcao != 0:
             print("OPÇÃO: ")
             opcao = int(input())
 
-    elif opcao == 4 or opcao == 5:
+    if opcao == 4:
+        print("OPÇÃO SELECIONADA: 4")
+        print("ENTRE COM AS INFORMAÇÕES DO PAGAMENTO")
+        print("NUMERO DO BOLETO: ")
+        num_boleto = int(input())
+        print("CEDENTE: ")
+        cedente = str(input())
+        print("VALOR: ")
+        valor_boleto = float(input())
+
+        if valor_boleto > saldo:
+            print("SALDO INSUFICIENTE")
+            print("PRESSIONE ENTER PARA CONTINUAR...")
+            enter = str(input())
+            print("-------------------------")
+            print("BEM VINDO AO BANK OF MEG: ")
+            print("-------------------------")
+            print("SELECIONE UMA DAS OPÇÕES: ")
+            print("-------------------------")
+            print("1 - ABRIR CONTA")
+            print("2 - VISUALIZAR MEUS DADOS")
+            print("3 - TRANSFERÊNCIA")
+            print("4 - PAGAMENTO")
+            print("5 - VISUALIZAR EXTRATO")
+            print("0 - SAIR")
+            print("-------------------------")
+            print("OPÇÃO: ")
+            opcao = int(input())
+        else:
+            print("PAGAMENTO REALIZADO COM SUCESSO")
+            saldo = saldo - valor_boleto
+            print("SALDO ATUAL:", saldo)
+            print("PRESSIONE ENTER PARA CONTINUAR...")
+            enter = str(input())
+            print("-------------------------")
+            print("BEM VINDO AO BANK OF MEG: ")
+            print("-------------------------")
+            print("SELECIONE UMA DAS OPÇÕES: ")
+            print("-------------------------")
+            print("1 - ABRIR CONTA")
+            print("2 - VISUALIZAR MEUS DADOS")
+            print("3 - TRANSFERÊNCIA")
+            print("4 - PAGAMENTO")
+            print("5 - VISUALIZAR EXTRATO")
+            print("0 - SAIR")
+            print("-------------------------")
+            print("OPÇÃO: ")
+            opcao = int(input())
+
+    if opcao == 5:
         print("OPÇÃO AINDA NÃO LIBERADA PARA OS CLIENTES")
         print("-------------------------")
         print("BEM VINDO AO BANK OF MEG: ")
