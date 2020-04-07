@@ -20,6 +20,7 @@ data_transacao = str()
 sinal_transacao = str()
 extrato = []
 conta_aberta = bool()
+descricao_extrato = str()
 
 print("-------------------------")
 print("BEM VINDO AO BANK OF MEG ")
@@ -37,6 +38,24 @@ print("OPÇÃO: ")
 opcao = int(input())
 
 while opcao != 0:
+
+    while opcao != 1 and opcao != 2 and opcao != 3 and opcao != 4 and opcao != 5 and opcao != 0:
+        print("OPÇÃO NÃO EXISTE")
+        print("-------------------------")
+        print("BEM VINDO AO BANK OF MEG: ")
+        print("-------------------------")
+        print("SELECIONE UMA DAS OPÇÕES: ")
+        print("-------------------------")
+        print("1 - ABRIR CONTA")
+        print("2 - VISUALIZAR MEUS DADOS")
+        print("3 - TRANSFERÊNCIA")
+        print("4 - PAGAMENTO")
+        print("5 - VISUALIZAR EXTRATO")
+        print("0 - SAIR")
+        print("-------------------------")
+        print("OPÇÃO: ")
+        opcao = int(input())
+            
     if opcao == 1:
         if conta_aberta == False:
             print("OPÇÃO SELECIONADA: 1")
@@ -118,7 +137,7 @@ while opcao != 0:
             print("VALOR: ")
             valor_transacao = float(input())
 
-            while valor_transacao > saldo:
+            if valor_transacao > saldo:
                 print("SALDO INSUFICIENTE")
                 print("PRESSIONE ENTER PARA CONTINUAR...")
                 enter = str(input())
@@ -174,7 +193,7 @@ while opcao != 0:
             print("VALOR: ")
             valor_transacao = float(input())
 
-            while valor_transacao > saldo:
+            if valor_transacao > saldo:
                 print("SALDO INSUFICIENTE")
                 print("PRESSIONE ENTER PARA CONTINUAR...")
                 enter = str(input())
@@ -219,7 +238,7 @@ while opcao != 0:
                 opcao = int(input())
 
         if opcao == 5:
-            if descricao_extrato != " ":
+            if  extrato:
                 print("OPÇÃO SELECIONADA: 5")
                 print (*extrato, sep= "\n")
                 print("PRESSIONE ENTER PARA CONTINUAR...")
@@ -256,22 +275,7 @@ while opcao != 0:
                 print("-------------------------")
                 print("OPÇÃO: ")
                 opcao = int(input())
-        else:
-            print("OPÇÃO NÃO EXISTE")
-            print("-------------------------")
-            print("BEM VINDO AO BANK OF MEG: ")
-            print("-------------------------")
-            print("SELECIONE UMA DAS OPÇÕES: ")
-            print("-------------------------")
-            print("1 - ABRIR CONTA")
-            print("2 - VISUALIZAR MEUS DADOS")
-            print("3 - TRANSFERÊNCIA")
-            print("4 - PAGAMENTO")
-            print("5 - VISUALIZAR EXTRATO")
-            print("0 - SAIR")
-            print("-------------------------")
-            print("OPÇÃO: ")
-            opcao = int(input())
+
     else:
         print("CONTA AINDA NÃO FOI ABERTA")
         print("PRESSIONE ENTER PARA CONTINUAR...")
