@@ -141,7 +141,7 @@ while opcao != 0:
                 saldo = saldo - valor_transacao
                 data_transacao = time.strftime("%d/%m/%Y")
                 sinal_transacao = "+"
-                descricao_extrato = data_transacao, "|", sinal_transacao, valor_transacao, "|", "TRANSFERENCIA PARA AGENCIA: ", agencia_destino, "CONTA: ", conta_destino  
+                descricao_extrato = data_transacao + "|" + sinal_transacao + valor_transacao + "|" + "TRANSFERENCIA PARA AGENCIA: " + agencia_destino + "CONTA: " + conta_destino  
                 extrato.append(descricao_extrato)
                 print("SALDO ATUAL:", saldo)
                 print("PRESSIONE ENTER PARA CONTINUAR...")
@@ -194,7 +194,7 @@ while opcao != 0:
                 saldo = saldo - valor_transacao
                 data_transacao = time.strftime("%d/%m/%Y")
                 sinal_transacao = "-"
-                descricao_extrato = data_transacao, "|", sinal_transacao, valor_transacao, "|", "PAGAMENTO DE BOLETO, CEDENTE: ", cedente
+                descricao_extrato = data_transacao + "|" + sinal_transacao, valor_transacao + "|" + "PAGAMENTO DE BOLETO, CEDENTE: " + cedente
                 extrato.append(descricao_extrato)
                 print("SALDO ATUAL:", saldo)
                 print("PRESSIONE ENTER PARA CONTINUAR...")
@@ -215,9 +215,9 @@ while opcao != 0:
                 opcao = int(input())
 
         if opcao == 5:
-            print("OPÇÃO SELECIONADA: 5")
-            for i in range(len(extrato)):
-                print (*extrato[i])
+            if descricao_extrato != " ":
+                print("OPÇÃO SELECIONADA: 5")
+                print (*extrato, sep= "\n")
                 print("PRESSIONE ENTER PARA CONTINUAR...")
                 enter = str(input())
                 print("-------------------------")
