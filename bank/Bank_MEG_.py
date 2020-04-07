@@ -19,7 +19,7 @@ cedente = str()
 data_transacao = str()
 sinal_transacao = str()
 extrato = []
-conta_aberta = False
+conta_aberta = bool()
 
 print("-------------------------")
 print("BEM VINDO AO BANK OF MEG ")
@@ -141,7 +141,10 @@ while opcao != 0:
                 saldo = saldo - valor_transacao
                 data_transacao = time.strftime("%d/%m/%Y")
                 sinal_transacao = "+"
-                descricao_extrato = data_transacao + "|" + sinal_transacao + valor_transacao + "|" + "TRANSFERENCIA PARA AGENCIA: " + agencia_destino + "CONTA: " + conta_destino  
+                valor_transacao_str = str(valor_transacao)
+                agencia_destino_str = str(agencia_destino)
+                conta_destino_str = str(conta_destino)
+                descricao_extrato = data_transacao + "|" + sinal_transacao + valor_transacao_str + "|" + "TRANSFERENCIA PARA AGENCIA: " + agencia_destino_str + ", CONTA: " + conta_destino_str  
                 extrato.append(descricao_extrato)
                 print("SALDO ATUAL:", saldo)
                 print("PRESSIONE ENTER PARA CONTINUAR...")
@@ -194,7 +197,8 @@ while opcao != 0:
                 saldo = saldo - valor_transacao
                 data_transacao = time.strftime("%d/%m/%Y")
                 sinal_transacao = "-"
-                descricao_extrato = data_transacao + "|" + sinal_transacao, valor_transacao + "|" + "PAGAMENTO DE BOLETO, CEDENTE: " + cedente
+                valor_transacao_str = str(valor_transacao)
+                descricao_extrato = data_transacao + "|" + sinal_transacao + valor_transacao_str + "|" + "PAGAMENTO DE BOLETO, CEDENTE: " + cedente
                 extrato.append(descricao_extrato)
                 print("SALDO ATUAL:", saldo)
                 print("PRESSIONE ENTER PARA CONTINUAR...")
