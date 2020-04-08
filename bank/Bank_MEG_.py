@@ -1,16 +1,17 @@
 import random
 import time
+import re
 
 opcao = int()
 nome = str()
 cpf = int() 
 saldo = float()
 agencia = "0001"
-conta = random.randrange(1,9999)
-digito = random.randrange(1,9)
+conta = random.randrange (1,9999)
+digito = random.randrange (1,9)
 var_global_conta = 9999
 enter = str()
-agencia_destino = int()
+agencia_destino = str()
 conta_destino = int()
 digito_destino = int()
 valor_transacao = float()
@@ -21,6 +22,7 @@ sinal_transacao = str()
 extrato = []
 conta_aberta = bool()
 descricao_extrato = str()
+conta_digito = str()
 
 print("-------------------------")
 print("BEM VINDO AO BANK OF MEG ")
@@ -61,25 +63,31 @@ while opcao != 0:
             print("OPÇÃO SELECIONADA: 1")
             print("INFORME NOME: ")
             nome = str(input())
-            print("INFORME CPF: ")
-            cpf = int(input())
-            print("INFORME SALDO: ")
-            saldo = float(input())
-            print("-------------------------")
-            print("BEM VINDO AO BANK OF MEG: ")
-            print("-------------------------")
-            print("SELECIONE UMA DAS OPÇÕES: ")
-            print("-------------------------")
-            print("1 - ABRIR CONTA")
-            print("2 - VISUALIZAR MEUS DADOS")
-            print("3 - TRANSFERÊNCIA")
-            print("4 - PAGAMENTO")
-            print("5 - VISUALIZAR EXTRATO")
-            print("0 - SAIR")
-            print("-------------------------")
-            print("OPÇÃO: ")
-            opcao = int(input())
-            conta_aberta = True
+
+            while nome.isalpha() == False:
+                print("ATENÇÃO!! É PERMITIDO APENAS LETRAS NO NOME, DIGITE NOVAMENTE")
+                print("INFORME NOME: ")
+                nome = str(input())
+            else:
+                print("INFORME CPF: ")
+                cpf = int(input())
+                print("INFORME SALDO: ")
+                saldo = float(input())
+                print("-------------------------")
+                print("BEM VINDO AO BANK OF MEG: ")
+                print("-------------------------")
+                print("SELECIONE UMA DAS OPÇÕES: ")
+                print("-------------------------")
+                print("1 - ABRIR CONTA")
+                print("2 - VISUALIZAR MEUS DADOS")
+                print("3 - TRANSFERÊNCIA")
+                print("4 - PAGAMENTO")
+                print("5 - VISUALIZAR EXTRATO")
+                print("0 - SAIR")
+                print("-------------------------")
+                print("OPÇÃO: ")
+                opcao = int(input())
+                conta_aberta = True
         else:
             print("CONTA JÁ CRIADA")
             print("PRESSIONE ENTER PARA CONTINUAR...")
@@ -103,11 +111,13 @@ while opcao != 0:
         if opcao == 2:
             print("OPÇÃO SELECIONADA: 2")
             print("AGENCIA: ", agencia)
-            print("CONTA: ", conta)
-            print("DIGITO: ", digito)
+            conta_str = str(conta)
+            digito_str = str(digito)
+            conta_digito = "CONTA: " + conta_str + "-" + digito_str
+            print(conta_digito)
             print("NOME: ", nome)
             print("CPF: ", cpf)
-            print("SALDO: ", saldo)
+            print("SALDO: ", "{0:.2f}".format(round(saldo,2)))
             print("PRESSIONE ENTER PARA CONTINUAR...")
             enter = str(input())
             print("-------------------------")
@@ -129,7 +139,7 @@ while opcao != 0:
             print("OPÇÃO SELECIONADA: 3")
             print("ENTRE COM AS INFORMAÇÕES DA CONTA DESTINO")
             print("AGENCIA: ")
-            agencia_destino = int(input())
+            agencia_destino = str(input())
             print("CONTA: ")
             conta_destino = int(input())
             print("DIGITO: ")
@@ -159,13 +169,14 @@ while opcao != 0:
                 print("TRANSFERÊNCIA REALIZADA COM SUCESSO")
                 saldo = saldo - valor_transacao
                 data_transacao = time.strftime("%d/%m/%Y")
-                sinal_transacao = "+"
+                sinal_transacao = "-"
                 valor_transacao_str = str(valor_transacao)
                 agencia_destino_str = str(agencia_destino)
                 conta_destino_str = str(conta_destino)
-                descricao_extrato = data_transacao + "|" + sinal_transacao + valor_transacao_str + "|" + "TRANSFERENCIA PARA AGENCIA: " + agencia_destino_str + ", CONTA: " + conta_destino_str  
+                digito_destino_str = str(digito_destino)
+                descricao_extrato = data_transacao + "|" + sinal_transacao + valor_transacao_str + "|" + "TRANSFERENCIA PARA AGENCIA: " + agencia_destino_str + ", CONTA: " + conta_destino_str + "-" + digito_destino_str  
                 extrato.append(descricao_extrato)
-                print("SALDO ATUAL:", saldo)
+                print("SALDO ATUAL:", "{0:.2f}".format(round(saldo,2)))
                 print("PRESSIONE ENTER PARA CONTINUAR...")
                 enter = str(input())
                 print("-------------------------")
@@ -219,7 +230,7 @@ while opcao != 0:
                 valor_transacao_str = str(valor_transacao)
                 descricao_extrato = data_transacao + "|" + sinal_transacao + valor_transacao_str + "|" + "PAGAMENTO DE BOLETO, CEDENTE: " + cedente
                 extrato.append(descricao_extrato)
-                print("SALDO ATUAL:", saldo)
+                print("SALDO ATUAL:", "{0:.2f}".format(round(saldo,2)))
                 print("PRESSIONE ENTER PARA CONTINUAR...")
                 enter = str(input())
                 print("-------------------------")
