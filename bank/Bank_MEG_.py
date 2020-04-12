@@ -96,10 +96,11 @@ while opcao != 0:
                 cpf = str(input())
                 retorno_cpf = validar_cpf(cpf)
                 
-                if retorno_cpf == False:
+                while retorno_cpf == False:
                     print("ATENÇÃO!! CPF INVÁLIDO, DIGITE NOVAMENTE")
                     print("INFORME CPF: ")
                     cpf = str(input())
+                    retorno_cpf = validar_cpf(cpf)
                 else:
                     print("INFORME SALDO: ")
                     saldo = float(input())
