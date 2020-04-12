@@ -4,7 +4,7 @@ import re
 
 opcao = int()
 nome = str()
-cpf = int() 
+cpf = str() 
 saldo = float()
 agencia = "0001"
 conta = random.randrange (1,9999)
@@ -23,6 +23,29 @@ extrato = []
 conta_aberta = bool()
 descricao_extrato = str()
 conta_digito = str()
+
+def validar_cpf(cpf):
+    if not re.match(r'\d{3}\.\d{3}\.\d{3}-\d{2}', cpf) and not re.match(r'\d{3}\d{3}\d{3}\d{2}', cpf) and not re.match(r'\d{3}\d{3}\d{3}-\d{2}', cpf):
+        return False
+
+    numeros_inteiros_cpf = [int(digit) for digit in cpf if digit.isdigit()]
+    
+    if len(numeros_inteiros_cpf) != 11:
+        return False
+
+    soma_produtos = sum(a*b for a, b in zip(numeros_inteiros_cpf[0:9], range(10, 1, -1)))
+    digito_esperado = (soma_produtos * 10) % 11
+    
+    if numeros_inteiros_cpf[9] != digito_esperado:
+        return False
+    
+    soma_produtos = sum(a*b for a, b in zip(numeros_inteiros_cpf[0:10], range(11, 1, -1)))
+    digito_esperado = (soma_produtos * 10) % 11
+    
+    if numeros_inteiros_cpf[10] != digito_esperado:
+        return False
+
+    return True
 
 print("-------------------------")
 print("BEM VINDO AO BANK OF MEG ")
@@ -58,8 +81,8 @@ while opcao != 0:
         print("OPÇÃO: ")
         opcao = int(input())
             
-    if opcao == 1:
-        if conta_aberta == False:
+    if conta_aberta == False:
+        if opcao == 1:
             print("OPÇÃO SELECIONADA: 1")
             print("INFORME NOME: ")
             nome = str(input())
@@ -70,43 +93,50 @@ while opcao != 0:
                 nome = str(input())
             else:
                 print("INFORME CPF: ")
-                cpf = int(input())
-                print("INFORME SALDO: ")
-                saldo = float(input())
-                print("-------------------------")
-                print("BEM VINDO AO BANK OF MEG: ")
-                print("-------------------------")
-                print("SELECIONE UMA DAS OPÇÕES: ")
-                print("-------------------------")
-                print("1 - ABRIR CONTA")
-                print("2 - VISUALIZAR MEUS DADOS")
-                print("3 - TRANSFERÊNCIA")
-                print("4 - PAGAMENTO")
-                print("5 - VISUALIZAR EXTRATO")
-                print("0 - SAIR")
-                print("-------------------------")
-                print("OPÇÃO: ")
-                opcao = int(input())
-                conta_aberta = True
-        else:
-            print("CONTA JÁ CRIADA")
-            print("PRESSIONE ENTER PARA CONTINUAR...")
-            enter = str(input())
-            print("-------------------------")
-            print("BEM VINDO AO BANK OF MEG: ")
-            print("-------------------------")
-            print("SELECIONE UMA DAS OPÇÕES: ")
-            print("-------------------------")
-            print("1 - ABRIR CONTA")
-            print("2 - VISUALIZAR MEUS DADOS")
-            print("3 - TRANSFERÊNCIA")
-            print("4 - PAGAMENTO")
-            print("5 - VISUALIZAR EXTRATO")
-            print("0 - SAIR")
-            print("-------------------------")
-            print("OPÇÃO: ")
-            opcao = int(input())
-    
+                cpf = str(input())
+                retorno_cpf = validar_cpf(cpf)
+                
+                if retorno_cpf == False:
+                    print("ATENÇÃO!! CPF INVÁLIDO, DIGITE NOVAMENTE")
+                    print("INFORME CPF: ")
+                    cpf = str(input())
+                else:
+                    print("INFORME SALDO: ")
+                    saldo = float(input())
+                    print("-------------------------")
+                    print("BEM VINDO AO BANK OF MEG: ")
+                    print("-------------------------")
+                    print("SELECIONE UMA DAS OPÇÕES: ")
+                    print("-------------------------")
+                    print("1 - ABRIR CONTA")
+                    print("2 - VISUALIZAR MEUS DADOS")
+                    print("3 - TRANSFERÊNCIA")
+                    print("4 - PAGAMENTO")
+                    print("5 - VISUALIZAR EXTRATO")
+                    print("0 - SAIR")
+                    print("-------------------------")
+                    print("OPÇÃO: ")
+                    opcao = int(input())
+                    conta_aberta = True
+    else:
+        print("CONTA JÁ CRIADA")
+        print("PRESSIONE ENTER PARA CONTINUAR...")
+        enter = str(input())
+        print("-------------------------")
+        print("BEM VINDO AO BANK OF MEG: ")
+        print("-------------------------")
+        print("SELECIONE UMA DAS OPÇÕES: ")
+        print("-------------------------")
+        print("1 - ABRIR CONTA")
+        print("2 - VISUALIZAR MEUS DADOS")
+        print("3 - TRANSFERÊNCIA")
+        print("4 - PAGAMENTO")
+        print("5 - VISUALIZAR EXTRATO")
+        print("0 - SAIR")
+        print("-------------------------")
+        print("OPÇÃO: ")
+        opcao = int(input())
+
     if conta_aberta == True:
         if opcao == 2:
             print("OPÇÃO SELECIONADA: 2")
