@@ -71,7 +71,6 @@ def opcao_1():
     global cpf
     global saldo
     global conta_aberta
-    global opcao
     print("OPÇÃO SELECIONADA: 1")
     print("INFORME NOME: ")
     nome = str(input())
@@ -102,7 +101,6 @@ def opcao_2():
     global conta_str
     global digito_str
     global conta_digito
-    global opcao
     print("OPÇÃO SELECIONADA: 2")
     print("AGENCIA: ", agencia)
     conta_str = str(conta)
@@ -124,7 +122,6 @@ def opcao_3():
     global saldo
     global valor_transacao
     global descricao_extrato
-    global opcao
     print("OPÇÃO SELECIONADA: 3")
     print("ENTRE COM AS INFORMAÇÕES DA CONTA DESTINO")
     print("AGENCIA: ")
@@ -165,7 +162,6 @@ def opcao_4():
     global cedente
     global valor_transacao
     global descricao_extrato
-    global opcao
     print("OPÇÃO SELECIONADA: 4")
     print("ENTRE COM AS INFORMAÇÕES DO PAGAMENTO")
     print("NUMERO DO BOLETO: ")
@@ -197,7 +193,6 @@ def opcao_4():
 
 def opcao_5():
     global extrato
-    global opcao
     if  extrato:
         print("OPÇÃO SELECIONADA: 5")
         print (*extrato, sep= "\n")
@@ -221,15 +216,15 @@ while opcao != 0:
         exibir_menu()
         opcao = opcao_digitada()
 
-    if conta_aberta == False:
-        if opcao == 1:        
+    if opcao == 1:        
+        if conta_aberta == False:
             opcao = opcao_1()
-    else:
-        print("CONTA JÁ CRIADA")
-        print("PRESSIONE ENTER PARA CONTINUAR...")
-        enter = str(input())
-        exibir_menu()
-        opcao = opcao_digitada()
+        else:
+            print("CONTA JÁ CRIADA")
+            print("PRESSIONE ENTER PARA CONTINUAR...")
+            enter = str(input())
+            exibir_menu()
+            opcao = opcao_digitada()
 
     if conta_aberta == True:
         if opcao == 2:
@@ -238,13 +233,13 @@ while opcao != 0:
             opcao = opcao_3()    
         elif opcao == 4:
             opcao = opcao_4()
-        elif opcao == 5:    
+        elif opcao == 5:
             opcao = opcao_5()
     else:
-            print("CONTA AINDA NÃO FOI ABERTA")
-            print("PRESSIONE ENTER PARA CONTINUAR...")
-            enter = str(input())
-            exibir_menu()
-            opcao = opcao_digitada()
+        print("CONTA AINDA NÃO FOI ABERTA")
+        print("PRESSIONE ENTER PARA CONTINUAR...")
+        enter = str(input())
+        exibir_menu()
+        opcao = opcao_digitada()
 else:
     quit
