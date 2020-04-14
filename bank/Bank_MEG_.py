@@ -218,7 +218,7 @@ while opcao != 0:
 
     if opcao == 1:        
         if conta_aberta == False:
-            opcao = opcao_1()
+            opcao_1()
         else:
             print("CONTA JÁ CRIADA")
             print("PRESSIONE ENTER PARA CONTINUAR...")
@@ -228,13 +228,13 @@ while opcao != 0:
 
     if conta_aberta == True:
         if opcao == 2:
-            opcao = opcao_2()
+            opcao_2()
         elif opcao == 3:
-            opcao = opcao_3()    
+            opcao_3()    
         elif opcao == 4:
-            opcao = opcao_4()
+            opcao_4()
         elif opcao == 5:
-            opcao = opcao_5()
+            opcao_5()
     else:
         print("CONTA AINDA NÃO FOI ABERTA")
         print("PRESSIONE ENTER PARA CONTINUAR...")
