@@ -80,7 +80,6 @@ def opcao_1():
     global cpf
     global saldo
     global conta_aberta
-    print("OPÇÃO SELECIONADA: 1")
     print("INFORME NOME: ")
     nome = str(input())
     nome_sem_espaco = nome.replace(" ", "")
@@ -112,7 +111,6 @@ def opcao_2():
     global conta_str
     global digito_str
     global conta_digito
-    print("OPÇÃO SELECIONADA: 2")
     print("AGENCIA: ", agencia)
     conta_str = str(conta)
     digito_str = str(digito)
@@ -126,14 +124,24 @@ def opcao_2():
     exibir_menu()
     opcao = opcao_digitada()
 
-def opcao_3():
+def opcao_3_submenu():
+    print("-------------------------")
+    print("SELECIONE UMA DAS OPÇÕES: ")
+    print("-------------------------")
+    print("1 - TRANSFERENCIA PARA CONTA BANK OF MEG")
+    print("2 - TRANSFERENCIA ENTRE BANCOS")
+    print("0 - VOLTAR")
+    print("-------------------------")
+    print("OPÇÃO: ")
+    opcao = opcao_digitada()
+
+def opcao_3_submenu_opcao_1():
     global agencia_destino
     global conta_destino
     global digito_destino
     global saldo
     global valor_transacao
     global descricao_extrato
-    print("OPÇÃO SELECIONADA: 3")
     print("ENTRE COM AS INFORMAÇÕES DA CONTA DESTINO")
     print("AGENCIA: ")
     agencia_destino = str(input())
@@ -167,13 +175,65 @@ def opcao_3():
         exibir_menu()
         opcao = opcao_digitada()
 
+def opcao_3_submenu_opcao_2():
+    global codigo_banco_destino
+    global agencia_destino
+    global conta_destino
+    global digito_destino
+    global saldo
+    global valor_transacao
+    global descricao_extrato
+    global cpf
+    print("ENTRE COM AS INFORMAÇÕES DA CONTA DESTINO")
+    print("CODIGO DO BANCO: ")
+    codigo_banco_destino = str(input())
+    print("AGENCIA: ")
+    agencia_destino = str(input())
+    print("CONTA: ")
+    conta_destino = int(input())
+    print("DIGITO: ")
+    digito_destino = int(input())
+    print("CPF: ")
+    cpf_destino = str(input())
+    retorno_cpf = validar_cpf(cpf_destino)
+        
+    while retorno_cpf == False:
+        print("ATENÇÃO!! CPF INVÁLIDO, DIGITE NOVAMENTE")
+        print("INFORME CPF: ")
+        cpf_destino = str(input())
+        retorno_cpf = validar_cpf(cpf)
+    else:
+        print("VALOR: ")
+        valor_transacao = float(input()) 
+        if valor_transacao > saldo:
+            print("SALDO INSUFICIENTE")
+            print("PRESSIONE ENTER PARA CONTINUAR...")
+            enter = str(input())
+            exibir_menu()
+            opcao = opcao_digitada()
+        else:
+            print("TRANSFERÊNCIA REALIZADA COM SUCESSO")
+            saldo = saldo - valor_transacao
+            data_transacao = time.strftime("%d/%m/%Y")
+            sinal_transacao = "-"
+            valor_transacao_str = str(valor_transacao)
+            agencia_destino_str = str(agencia_destino)
+            conta_destino_str = str(conta_destino)
+            digito_destino_str = str(digito_destino)
+            descricao_extrato = data_transacao + "|" + sinal_transacao + valor_transacao_str + "|" + "TRANSFERENCIA PARA AGENCIA: " + agencia_destino_str + ", CONTA: " + conta_destino_str + "-" + digito_destino_str  
+            extrato.append(descricao_extrato)
+            print("SALDO ATUAL:", "{0:.2f}".format(round(saldo,2)))
+            print("PRESSIONE ENTER PARA CONTINUAR...")
+            enter = str(input())
+            exibir_menu()
+            opcao = opcao_digitada()
+    
 def opcao_4():
     global saldo
     global num_boleto
     global cedente
     global valor_transacao
     global descricao_extrato
-    print("OPÇÃO SELECIONADA: 4")
     print("ENTRE COM AS INFORMAÇÕES DO PAGAMENTO")
     print("NUMERO DO BOLETO: ")
     num_boleto = int(input())
@@ -205,7 +265,6 @@ def opcao_4():
 def opcao_5():
     global extrato
     if  extrato:
-        print("OPÇÃO SELECIONADA: 5")
         print (*extrato, sep= "\n")
         print("PRESSIONE ENTER PARA CONTINUAR...")
         enter = str(input())
@@ -241,7 +300,13 @@ while opcao != 0:
         if opcao == 2:
             opcao_2()
         elif opcao == 3:
-            opcao_3()    
+            opcao_3_submenu()
+            if opcao == 1:
+                opcao_3_submenu_opcao_1()
+            elif opcao == 2:
+                opcao_3_submenu_opcao_2()
+            else:
+                exibir_menu()    
         elif opcao == 4:
             opcao_4()
         elif opcao == 5:
