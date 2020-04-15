@@ -74,11 +74,13 @@ def opcao_1():
     print("OPÇÃO SELECIONADA: 1")
     print("INFORME NOME: ")
     nome = str(input())
-
-    while nome.isalpha() == False and nome.isspace() == True:
+    nome_sem_espaco = nome.replace(" ", "")
+    
+    while nome_sem_espaco.isalpha() == False:
         print("ATENÇÃO!! É PERMITIDO APENAS LETRAS NO NOME, DIGITE NOVAMENTE")
         print("INFORME NOME: ")
         nome = str(input())
+        nome_sem_espaco = nome.replace(" ", "")
     else:
         print("INFORME CPF: ")
         cpf = str(input())
