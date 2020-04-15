@@ -4,7 +4,8 @@ import re
 
 opcao = int()
 nome = str()
-cpf = str() 
+cpf = str()
+digito_esperado = int()
 saldo = float()
 agencia = "0001"
 conta = random.randrange (1,99999)
@@ -33,13 +34,21 @@ def validar_cpf(cpf):
         return False
 
     soma_produtos = sum(a*b for a, b in zip(numeros_inteiros_cpf[0:9], range(10, 1, -1)))
-    digito_esperado = (soma_produtos * 10) % 11
-    
+    resto_esperado = soma_produtos % 11
+    if resto_esperado < 2:
+        digito_esperado = 0
+    else:
+        digito_esperado = 11 - resto_esperado 
+        
     if numeros_inteiros_cpf[9] != digito_esperado:
         return False
     
     soma_produtos = sum(a*b for a, b in zip(numeros_inteiros_cpf[0:10], range(11, 1, -1)))
-    digito_esperado = (soma_produtos * 10) % 11
+    resto_esperado = soma_produtos % 11
+    if resto_esperado < 2:
+        digito_esperado = 0
+    else:
+        digito_esperado = 11 - resto_esperado    
     
     if numeros_inteiros_cpf[10] != digito_esperado:
         return False
