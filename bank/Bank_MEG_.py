@@ -75,7 +75,7 @@ def opcao_1():
     print("INFORME NOME: ")
     nome = str(input())
 
-    while nome.isalpha() == False:
+    while nome.isalpha() == False and nome.isspace() == True:
         print("ATENÇÃO!! É PERMITIDO APENAS LETRAS NO NOME, DIGITE NOVAMENTE")
         print("INFORME NOME: ")
         nome = str(input())
