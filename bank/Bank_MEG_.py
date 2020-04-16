@@ -56,19 +56,29 @@ def validar_cpf(cpf):
     return True
 
 def exibir_menu():
-    print("-------------------------")
-    print("BEM VINDO AO BANK OF MEG ")
-    print("-------------------------")
-    print("SELECIONE UMA DAS OPÇÕES: ")
-    print("-------------------------")
-    print("1 - ABRIR CONTA")
-    print("2 - VISUALIZAR MEUS DADOS")
-    print("3 - TRANSFERÊNCIA")
-    print("4 - PAGAMENTO")
-    print("5 - VISUALIZAR EXTRATO")
-    print("0 - SAIR")
-    print("-------------------------")
-    print("OPÇÃO: ")
+    if conta_aberta == True:
+        print("-------------------------")
+        print("BEM VINDO AO BANK OF MEG ")
+        print("-------------------------")
+        print("SELECIONE UMA DAS OPÇÕES: ")
+        print("-------------------------")
+        print("2 - VISUALIZAR MEUS DADOS")
+        print("3 - TRANSFERÊNCIA")
+        print("4 - PAGAMENTO")
+        print("5 - VISUALIZAR EXTRATO")
+        print("0 - SAIR")
+        print("-------------------------")
+        print("OPÇÃO: ")
+    else:
+        print("-------------------------")
+        print("BEM VINDO AO BANK OF MEG ")
+        print("-------------------------")
+        print("SELECIONE UMA DAS OPÇÕES: ")
+        print("-------------------------")
+        print("1 - ABRIR CONTA")
+        print("0 - SAIR")
+        print("-------------------------")
+        print("OPÇÃO: ")
 
 def opcao_digitada():
     global opcao
