@@ -155,8 +155,7 @@ def opcao_3_submenu():
     print("0 - VOLTAR")
     print("-------------------------")
     print("OPÇÃO: ")
-    opcao = opcao_digitada()
-
+    
 def opcao_3_submenu_opcao_1():
     global agencia_destino
     global conta_destino
@@ -164,6 +163,7 @@ def opcao_3_submenu_opcao_1():
     global saldo
     global valor_transacao
     global descricao_extrato
+    global opcao
     print("ENTRE COM AS INFORMAÇÕES DA CONTA DESTINO")
     print("AGENCIA: ")
     agencia_destino = str(input())
@@ -174,7 +174,7 @@ def opcao_3_submenu_opcao_1():
     print("VALOR: ")
     valor_transacao = float(input())
 
-    if valor_transacao > saldo:
+    while valor_transacao > saldo:
         print("SALDO INSUFICIENTE")
         print("PRESSIONE ENTER PARA CONTINUAR...")
         enter = str(input())
@@ -194,8 +194,8 @@ def opcao_3_submenu_opcao_1():
         print("SALDO ATUAL:", "{0:.2f}".format(round(saldo,2)))
         print("PRESSIONE ENTER PARA CONTINUAR...")
         enter = str(input())
-        exibir_menu()
-        opcao = opcao_digitada()
+        opcao = 3
+        opcao_3_submenu()
 
 def opcao_3_submenu_opcao_2():
     global codigo_banco_destino
@@ -247,8 +247,8 @@ def opcao_3_submenu_opcao_2():
             print("SALDO ATUAL:", "{0:.2f}".format(round(saldo,2)))
             print("PRESSIONE ENTER PARA CONTINUAR...")
             enter = str(input())
-            exibir_menu()
-            opcao = opcao_digitada()
+            opcao = 3
+            opcao_3_submenu()
     
 def opcao_4():
     global saldo
@@ -418,12 +418,21 @@ while opcao != 0:
             opcao_2()
         elif opcao == 3:
             opcao_3_submenu()
-            if opcao == 1:
-                opcao_3_submenu_opcao_1()
-            elif opcao == 2:
-                opcao_3_submenu_opcao_2()
+            opcao = opcao_digitada()
+            while opcao != 0:
+                while opcao != 1 and opcao != 2 and opcao != 0:
+                    print("OPÇÃO NÃO EXISTE")
+                    opcao_3_submenu()
+                    opcao = opcao_digitada() 
+                if opcao == 1:
+                    opcao_3_submenu_opcao_1()
+                    opcao = opcao_digitada()
+                else:
+                    opcao_3_submenu_opcao_2()
+                    opcao = opcao_digitada()
             else:
-                exibir_menu()    
+                exibir_menu()
+                opcao = opcao_digitada()                                  
         elif opcao == 4:
             opcao_4()
         elif opcao == 5:
