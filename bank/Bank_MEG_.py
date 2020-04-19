@@ -30,6 +30,7 @@ juros = float()
 taxa_juros = 0.02
 valor_emprestimo = float()
 valor_parcela = float()
+contrato_ativo = bool()
 
 def validar_cpf(cpf):
     if not re.match(r'\d{3}\.\d{3}\.\d{3}-\d{2}', cpf) and not re.match(r'\d{3}\d{3}\d{3}\d{2}', cpf) and not re.match(r'\d{3}\d{3}\d{3}-\d{2}', cpf):
@@ -300,17 +301,55 @@ def opcao_5():
         opcao = opcao_digitada()
 
 def opcao_6_submenu():
-    print("-------------------------")
-    print("SELECIONE UMA DAS OPÇÕES: ")
-    print("-------------------------")
-    print("1 - SIMULAR EMPRESTIMO")
-    print("2 - CONTRATAR EMPRESTIMO")
-    print("0 - VOLTAR")
-    print("-------------------------")
-    print("OPÇÃO: ")
-    opcao = opcao_digitada()
-
-def opcao_6_submenu_opcao_1():
+    global opcao
+    if contrato_ativo == True:
+        print("-------------------------")
+        print("SELECIONE UMA DAS OPÇÕES: ")
+        print("-------------------------")
+        print("1 - SIMULAR")
+        print("2 - CONTRATOS ATIVOS")
+        print("0 - VOLTAR")
+        print("-------------------------")
+        print("OPÇÃO: ")
+        opcao = opcao_digitada()
+        while opcao != 0:
+            while opcao != 1 and opcao != 2 and opcao != 0:
+                print("OPÇÃO NÃO EXISTE")
+                opcao_6_submenu()
+                opcao = opcao_digitada()
+            if opcao == 1:
+                opcao_6_submenu_simular_emprestimo()
+                opcao_6_submenu_simular_emprestimo_efetivar()
+                opcao = opcao_digitada()
+            elif opcao == 2:
+                opcao_6_submenu_contratos_ativos()
+                opcao = opcao_digitada()
+        else:
+            exibir_menu()
+            opcao = opcao_digitada()
+    else:
+        print("-------------------------")
+        print("SELECIONE UMA DAS OPÇÕES: ")
+        print("-------------------------")
+        print("1 - SIMULAR")
+        print("0 - VOLTAR")
+        print("-------------------------")
+        print("OPÇÃO: ")
+        opcao = opcao_digitada()
+        while opcao != 0:
+            while opcao != 1 and opcao != 2 and opcao != 0:
+                print("OPÇÃO NÃO EXISTE")
+                opcao_6_submenu()
+                opcao = opcao_digitada()
+            if opcao == 1:
+                opcao_6_submenu_simular_emprestimo()
+                opcao_6_submenu_simular_emprestimo_efetivar()
+                opcao = opcao_digitada()
+        else:
+            exibir_menu()
+            opcao = opcao_digitada()
+        
+def opcao_6_submenu_simular_emprestimo():
     global saldo
     global valor_transacao
     global quantidade_parcelas
@@ -318,12 +357,13 @@ def opcao_6_submenu_opcao_1():
     global juros
     global taxa_juros
     global valor_emprestimo
+    global opcao
     print("ENTRE COM AS INFORMAÇÕES PARA SIMULAR EMPRESTIMO")
     print("VALOR: ")
     valor_transacao = float(input())
     if valor_transacao > valor_limite_disponivel:
         print("VALOR DO EMPRESTIMO NAO APROVADO")
-        opcao_6_submenu_opcao_1()
+        opcao_6_submenu_simular_emprestimo()
         opcao = opcao_digitada()
     else:
         print("QUANTIDADE DE PARCELAS: ")
@@ -340,59 +380,68 @@ def opcao_6_submenu_opcao_1():
             print("VALOR EMPRESTIMO: ", "{0:.2f}".format(round(valor_emprestimo,2)))
             print("QUANTIDADE DE PARCELAS: ", quantidade_parcelas)
             print("VALOR PARCELA:", "{0:.2f}".format(round(valor_parcela,2)))
-            print("PRESSIONE ENTER PARA CONTINUAR...")
-            enter = str(input())
+            
+def opcao_6_submenu_simular_emprestimo_efetivar():
+    global opcao      
+    print("-------------------------")
+    print("SELECIONE UMA DAS OPÇÕES: ")
+    print("-------------------------")
+    print("1 - EFETIVAR EMPRESTIMO")
+    print("2 - SIMULAR NOVAMENTE")
+    print("0 - VOLTAR")
+    print("-------------------------")
+    print("OPÇÃO: ")
+    opcao = opcao_digitada()
+    while opcao != 0:
+        while opcao != 1 and opcao != 2 and opcao != 0:
+            print("OPÇÃO NÃO EXISTE")
             opcao_6_submenu()
+            opcao = opcao_digitada() 
+        if opcao == 1:
+            efetivar_emprestimo()
             opcao = opcao_digitada()
+        elif opcao == 2:
+            opcao_6_submenu_simular_emprestimo()
+            opcao_6_submenu_simular_emprestimo_efetivar()
+            opcao = opcao_digitada()
+    else:
+        opcao_6_submenu()
+                  
+def opcao_6_submenu_contratos_ativos():
+    global extrato
+    print("CONTRATOS ATIVOS")
+    if  extrato:
+        print (*extrato, sep= "\n")
+        print("PRESSIONE ENTER PARA CONTINUAR...")
+        enter = str(input())
+        opcao_6_submenu()
+    else:
+        print("NENHUM ITEM PARA SER EXIBIDO")
+        print("PRESSIONE ENTER PARA CONTINUAR...")
+        enter = str(input())
+        opcao_6_submenu()
 
-def opcao_6_submenu_opcao_2():
+def efetivar_emprestimo():
     global saldo
+    global valor_limite_disponivel
+    global data_transacao
+    global sinal_transacao
     global valor_transacao
     global descricao_extrato
-    global cpf
-    print("ENTRE COM AS INFORMAÇÕES DA CONTA DESTINO")
-    print("CODIGO DO BANCO: ")
-    codigo_banco_destino = str(input())
-    print("AGENCIA: ")
-    agencia_destino = str(input())
-    print("CONTA: ")
-    conta_destino = int(input())
-    print("DIGITO: ")
-    digito_destino = int(input())
-    print("CPF: ")
-    cpf_destino = str(input())
-    retorno_cpf = validar_cpf(cpf_destino)
-        
-    while retorno_cpf == False:
-        print("ATENÇÃO!! CPF INVÁLIDO, DIGITE NOVAMENTE")
-        print("INFORME CPF: ")
-        cpf_destino = str(input())
-        retorno_cpf = validar_cpf(cpf)
-    else:
-        print("VALOR: ")
-        valor_transacao = float(input()) 
-        if valor_transacao > saldo:
-            print("SALDO INSUFICIENTE")
-            print("PRESSIONE ENTER PARA CONTINUAR...")
-            enter = str(input())
-            exibir_menu()
-            opcao = opcao_digitada()
-        else:
-            print("TRANSFERÊNCIA REALIZADA COM SUCESSO")
-            saldo = saldo - valor_transacao
-            data_transacao = time.strftime("%d/%m/%Y")
-            sinal_transacao = "-"
-            valor_transacao_str = str(valor_transacao)
-            agencia_destino_str = str(agencia_destino)
-            conta_destino_str = str(conta_destino)
-            digito_destino_str = str(digito_destino)
-            descricao_extrato = data_transacao + "|" + sinal_transacao + valor_transacao_str + "|" + "TRANSFERENCIA PARA AGENCIA: " + agencia_destino_str + ", CONTA: " + conta_destino_str + "-" + digito_destino_str  
-            extrato.append(descricao_extrato)
-            print("SALDO ATUAL:", "{0:.2f}".format(round(saldo,2)))
-            print("PRESSIONE ENTER PARA CONTINUAR...")
-            enter = str(input())
-            exibir_menu()
-            opcao = opcao_digitada()
+    global contrato_ativo
+    saldo = saldo + valor_transacao
+    valor_limite_disponivel = valor_limite_disponivel - valor_transacao
+    data_transacao = time.strftime("%d/%m/%Y")
+    contrato_ativo = True
+    sinal_transacao = "+"
+    valor_transacao_str = str(valor_transacao)
+    descricao_extrato = data_transacao + "|" + sinal_transacao + valor_transacao_str + "|" + "EMPRESTIMO CONTRATADO"
+    extrato.append(descricao_extrato)
+    print("SALDO ATUAL:", "{0:.2f}".format(round(saldo,2)))
+    print("LIMITE DISPONIVEL: ", "{0:.2f}".format(round(valor_limite_disponivel,2)))
+    print("PRESSIONE ENTER PARA CONTINUAR...")
+    enter = str(input())
+    opcao_6_submenu()
 
 exibir_menu()
 opcao = opcao_digitada()
@@ -439,12 +488,7 @@ while opcao != 0:
             opcao_5()
         elif opcao == 6:
             opcao_6_submenu()
-            if opcao == 1:
-                opcao_6_submenu_opcao_1()
-            elif opcao == 2:
-                opcao_6_submenu_opcao_2()
-            else:
-                exibir_menu()   
+
     else:
         print("CONTA AINDA NÃO FOI ABERTA")
         print("PRESSIONE ENTER PARA CONTINUAR...")
