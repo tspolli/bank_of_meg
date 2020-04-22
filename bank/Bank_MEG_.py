@@ -352,10 +352,10 @@ def simular_emprestimo():
     print("ENTRE COM AS INFORMAÇÕES PARA SIMULAR EMPRESTIMO")
     print("VALOR: ")
     valor_transacao = float(input())
-    if valor_transacao > valor_limite_disponivel:
+    while valor_transacao > valor_limite_disponivel:
         print("VALOR DO EMPRESTIMO NAO APROVADO")
-        simular_emprestimo()
-        opcao = opcao_digitada()
+        print("VALOR: ")
+        valor_transacao = float(input())
     else:
         print("QUANTIDADE DE PARCELAS: ")
         quantidade_parcelas = int(input())
