@@ -1,6 +1,10 @@
+import cliente
 import random
 import time
 import re
+from validacao import Validacao
+from cliente import Cliente
+from conta import Conta
 
 opcao = int()
 nome = str()
@@ -31,6 +35,10 @@ taxa_juros = 0.02
 valor_emprestimo = float()
 valor_parcela = float()
 contrato_ativo = bool()
+
+
+
+cliente = None
 
 def validar_cpf(cpf):
     if not re.match(r'\d{3}\.\d{3}\.\d{3}-\d{2}', cpf) and not re.match(r'\d{3}\d{3}\d{3}\d{2}', cpf) and not re.match(r'\d{3}\d{3}\d{3}-\d{2}', cpf):
@@ -95,36 +103,25 @@ def opcao_digitada():
     return opcao
 
 def opcao_1():
-    global nome
-    global cpf
-    global saldo
-    global conta_aberta
-    global valor_limite_disponivel
-    global taxa_limite_disponivel
+    global cliente
     print("INFORME NOME: ")
-    nome = str(input())
-    nome_sem_espaco = nome.replace(" ", "")
-    
-    while nome_sem_espaco.isalpha() == False:
+       
+    while Validacao.validar_nome(nome) == False:
         print("ATENÇÃO!! É PERMITIDO APENAS LETRAS NO NOME, DIGITE NOVAMENTE")
         print("INFORME NOME: ")
-        nome = str(input())
-        nome_sem_espaco = nome.replace(" ", "")
     else:
         print("INFORME CPF: ")
         cpf = str(input())
-        retorno_cpf = validar_cpf(cpf)
+        retorno_cpf = Validacao.validar_cpf(cpf)
         
-        while retorno_cpf == False:
+        while Validacao.validar_cpf(cpf) == False:
             print("ATENÇÃO!! CPF INVÁLIDO, DIGITE NOVAMENTE")
             print("INFORME CPF: ")
             cpf = str(input())
-            retorno_cpf = validar_cpf(cpf)
+            retorno_cpf = Validacao.validar_cpf(cpf)
         else:
             print("INFORME SALDO: ")
             saldo = float(input())
-            conta_aberta = True
-            valor_limite_disponivel = saldo * taxa_limite_disponivel  
             exibir_menu()
             opcao = opcao_digitada()
             
