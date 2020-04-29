@@ -1,7 +1,6 @@
 import re
 
 class Validacao:
-
     def validar_cpf(cpf):
         if not re.match(r'\d{3}\.\d{3}\.\d{3}-\d{2}', cpf) and not re.match(r'\d{3}\d{3}\d{3}\d{2}', cpf) and not re.match(r'\d{3}\d{3}\d{3}-\d{2}', cpf):
             return False
@@ -34,6 +33,6 @@ class Validacao:
         return True
 
     def validar_nome(nome):
-        nome = str(input())
         nome_sem_espaco = nome.replace(" ", "")
         return nome_sem_espaco.isalpha()
+        

@@ -1,10 +1,10 @@
-import cliente
 import random
 import time
 import re
 from validacao import Validacao
-from cliente import Cliente
 from conta import Conta
+from cliente import Cliente
+from visualizar_cliente import Visualizar_cliente
 
 opcao = int()
 nome = str()
@@ -38,7 +38,7 @@ contrato_ativo = bool()
 
 
 
-cliente = None
+dados_cliente = None
 
 def validar_cpf(cpf):
     if not re.match(r'\d{3}\.\d{3}\.\d{3}-\d{2}', cpf) and not re.match(r'\d{3}\d{3}\d{3}\d{2}', cpf) and not re.match(r'\d{3}\d{3}\d{3}-\d{2}', cpf):
@@ -72,7 +72,8 @@ def validar_cpf(cpf):
     return True
 
 def exibir_menu():
-    if conta_aberta == True:
+    global dados_cliente
+    if dados_cliente != None:
         print("-------------------------")
         print("BEM VINDO AO BANK OF MEG ")
         print("-------------------------")
@@ -103,12 +104,13 @@ def opcao_digitada():
     return opcao
 
 def opcao_1():
-    global cliente
+    global dados_cliente
     print("INFORME NOME: ")
-       
+    nome = str(input())   
     while Validacao.validar_nome(nome) == False:
         print("ATENÇÃO!! É PERMITIDO APENAS LETRAS NO NOME, DIGITE NOVAMENTE")
         print("INFORME NOME: ")
+        nome = str(input())
     else:
         print("INFORME CPF: ")
         cpf = str(input())
@@ -122,25 +124,13 @@ def opcao_1():
         else:
             print("INFORME SALDO: ")
             saldo = float(input())
+            dados_cliente = Cliente(nome, cpf, saldo)
+            dados_cliente = Conta.abrir_conta(dados_cliente)
             exibir_menu()
             opcao = opcao_digitada()
             
 def opcao_2():
-    global agencia
-    global conta_str
-    global digito_str
-    global conta_digito
-    print("AGENCIA: ", agencia)
-    conta_str = str(conta)
-    digito_str = str(digito)
-    conta_digito = "CONTA: " + conta_str + "-" + digito_str
-    print(conta_digito)
-    print("NOME: ", nome)
-    print("CPF: ", cpf)
-    print("SALDO: ", "{0:.2f}".format(round(saldo,2)))
-    print("LIMITE DISPONIVEL: ", "{0:.2f}".format(round(valor_limite_disponivel,2)))
-    print("PRESSIONE ENTER PARA CONTINUAR...")
-    enter = str(input())
+    Visualizar_cliente.visulizar_dados_cliente(dados_cliente)
     exibir_menu()
     opcao = opcao_digitada()
 
@@ -448,7 +438,7 @@ while opcao != 0:
             exibir_menu()
             opcao = opcao_digitada()
 
-    if conta_aberta == True:
+    if dados_cliente != None:
         if opcao == 2:
             opcao_2()
         elif opcao == 3:

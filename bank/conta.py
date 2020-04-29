@@ -2,10 +2,10 @@ from cliente import Cliente
 import random
 
 class Conta:
-    def abrir_conta(nome, cpf, valor):
+    def abrir_conta(amarelo):
         taxa_limite_disponivel = float(random.uniform(0.75,1.75))
-        valor_limite_disponivel = saldo * taxa_limite_disponivel 
-        cliente = Cliente(nome, cpf, valor, valor_limite_disponivel)
-        return cliente
+        amarelo.valor_limite_disponivel = amarelo.saldo * taxa_limite_disponivel
+        amarelo.conta_aberta = True
+        return amarelo
 
         
