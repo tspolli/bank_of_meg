@@ -6,10 +6,9 @@ from conta import Conta
 from cliente import Cliente
 from visualizar_cliente import Visualizar_cliente
 from menu import Menu
-from opcao_digitada import Opcao_digitada
-from menu_transferencia import Menu_transferencia
 from transferencia import Transferencia
 from pagar_boleto import Pagar_boleto
+from exibir_extrato import Extrato
 
 opcao = int()
 nome = str()
@@ -70,7 +69,7 @@ def opcao_1():
             dados_cliente = Cliente(nome, cpf, saldo)
             dados_cliente = Conta.abrir_conta(dados_cliente)
             Menu.exibir_menu(dados_cliente)
-            opcao = Opcao_digitada.opcao_digitada(opcao)
+            opcao = Menu.opcao_digitada(opcao)
             
 def opcao_2():
     global dados_cliente
@@ -79,7 +78,7 @@ def opcao_2():
     print("PRESSIONE ENTER PARA CONTINUAR...")
     enter = str(input())
     Menu.exibir_menu(dados_cliente)
-    opcao = Opcao_digitada.opcao_digitada(opcao)
+    opcao = Menu.opcao_digitada(opcao)
 
 def opcao_5():
     global extrato
@@ -89,13 +88,13 @@ def opcao_5():
         print("PRESSIONE ENTER PARA CONTINUAR...")
         enter = str(input())
         Menu.exibir_menu(dados_cliente)
-        opcao = Opcao_digitada.opcao_digitada(opcao)
+        opcao = Menu.opcao_digitada(opcao)
     else:
         print("NENHUM ITEM PARA SER EXIBIDO")
         print("PRESSIONE ENTER PARA CONTINUAR...")
         enter = str(input())
         Menu.exibir_menu(dados_cliente)
-        opcao = Opcao_digitada.opcao_digitada(opcao)
+        opcao = Menu.opcao_digitada(opcao)
 
 def opcao_6_submenu_simular():
     if contrato_ativo == True:
@@ -124,18 +123,18 @@ def validar_opcao_simular():
             opcao = simular_emprestimo_efetivar()
             if opcao != 1:
                 opcao_6_submenu_simular()
-                Opcao_digitada.opcao_digitada(opcao)
+                Menu.opcao_digitada(opcao)
         elif opcao == 2:
             contratos_ativos()
             opcao_6_submenu_simular()
-            opcao = Opcao_digitada.opcao_digitada(opcao)
+            opcao = Menu.opcao_digitada(opcao)
         else:
             print("OPCAO INVALIDA")
             opcao_6_submenu_simular()
-            Opcao_digitada.opcao_digitada(opcao)
+            Menu.opcao_digitada(opcao)
     else:
         Menu.exibir_menu(dados_cliente)
-        opcao = Opcao_digitada.opcao_digitada(opcao)
+        opcao = Menu.opcao_digitada(opcao)
         
 def simular_emprestimo():
     global saldo
@@ -182,12 +181,12 @@ def opcao_6_submenu_efetivar():
 def simular_emprestimo_efetivar():
     global opcao      
     opcao_6_submenu_efetivar()
-    opcao = Opcao_digitada.opcao_digitada(opcao)
+    opcao = Menu.opcao_digitada(opcao)
     while opcao != 0:
         while opcao != 1 and opcao != 2 and opcao != 0:
             print("OPÇÃO NÃO EXISTE")
             validar_opcao_simular()
-            opcao = Opcao_digitada.opcao_digitada(opcao) 
+            opcao = Menu.opcao_digitada(opcao) 
         if opcao == 1:
             efetivar_emprestimo()
             return 0
@@ -230,13 +229,13 @@ def efetivar_emprestimo():
     enter = str(input())
 
 Menu.exibir_menu(dados_cliente)
-opcao = Opcao_digitada.opcao_digitada(opcao)
+opcao = Menu.opcao_digitada(opcao)
 
 while opcao != 0:
     while opcao != 1 and opcao != 2 and opcao != 3 and opcao != 4 and opcao != 5 and opcao != 6 and opcao != 0:
         print("OPÇÃO NÃO EXISTE")
         Menu.exibir_menu(dados_cliente)
-        opcao = Opcao_digitada.opcao_digitada(opcao)
+        opcao = Menu.opcao_digitada(opcao)
 
     if opcao == 1:        
         if conta_aberta == False:
@@ -246,42 +245,43 @@ while opcao != 0:
             print("PRESSIONE ENTER PARA CONTINUAR...")
             enter = str(input())
             Menu.exibir_menu(dados_cliente)
-            opcao = Opcao_digitada.opcao_digitada(opcao)
+            opcao = Menu.opcao_digitada(opcao)
 
     if dados_cliente != None:
         if opcao == 2:
             opcao_2()
         elif opcao == 3:
-            Menu_transferencia.opcao_3_submenu()
-            opcao = Opcao_digitada.opcao_digitada(opcao)
+            Menu.opcao_3_submenu()
+            opcao = Menu.opcao_digitada(opcao)
             while opcao != 0:
                 while opcao != 1 and opcao != 2 and opcao != 0:
                     print("OPÇÃO NÃO EXISTE")
-                    Menu_transferencia.opcao_3_submenu()
-                    opcao = Opcao_digitada.opcao_digitada(opcao) 
+                    Menu.opcao_3_submenu()
+                    opcao = Menu.opcao_digitada(opcao) 
                 if opcao == 1:
                     Transferencia.opcao_3_submenu_opcao_1(dados_cliente)
-                    opcao = Opcao_digitada.opcao_digitada(opcao)
+                    opcao = Menu.opcao_digitada(opcao)
                 else:
                     Transferencia.opcao_3_submenu_opcao_2(dados_cliente)
-                    opcao = Opcao_digitada.opcao_digitada(opcao)
+                    opcao = Menu.opcao_digitada(opcao)
             else:
                 Menu.exibir_menu(dados_cliente)
-                opcao = Opcao_digitada.opcao_digitada(opcao)                                 
+                opcao = Menu.opcao_digitada(opcao)                                 
         elif opcao == 4:
             Pagar_boleto.pagar_boleto(dados_cliente)
-            opcao = Opcao_digitada.opcao_digitada(opcao)
+            opcao = Menu.opcao_digitada(opcao)
         elif opcao == 5:
-            opcao_5()
+            Extrato.exibir_extrato(extrato)
+            opcao = Menu.opcao_digitada(opcao)
         elif opcao == 6:
             opcao_6_submenu_simular()
-            opcao = Opcao_digitada.opcao_digitada(opcao)
+            opcao = Menu.opcao_digitada(opcao)
             validar_opcao_simular()
     else:
         print("CONTA AINDA NÃO FOI ABERTA")
         print("PRESSIONE ENTER PARA CONTINUAR...")
         enter = str(input())
         Menu.exibir_menu(dados_cliente)
-        opcao = Opcao_digitada.opcao_digitada(opcao)
+        opcao = Menu.opcao_digitada(opcao)
 else:
     quit

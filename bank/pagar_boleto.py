@@ -1,5 +1,4 @@
 import time
-from opcao_digitada import Opcao_digitada
 from menu import Menu
 
 extrato = []
