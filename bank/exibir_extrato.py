@@ -5,11 +5,12 @@ from cliente import Cliente
 
 
 class Extrato:
-    def exibir_extrato(extrato):
+    def exibir_extrato(dados_cliente, extrato):
         if  Transferencia.extrato:
             print (*extrato, sep= "\n")
             print("PRESSIONE ENTER PARA CONTINUAR...")
             enter = str(input())
+            return saldo, extrato
             Menu.exibir_menu(dados_cliente)
         else:
             print("NENHUM ITEM PARA SER EXIBIDO")

@@ -260,9 +260,11 @@ while opcao != 0:
                     opcao = Menu.opcao_digitada(opcao) 
                 if opcao == 1:
                     Transferencia.opcao_3_submenu_opcao_1(dados_cliente)
+                    saldo = Transferencia.saldo(saldo)
                     opcao = Menu.opcao_digitada(opcao)
                 else:
                     Transferencia.opcao_3_submenu_opcao_2(dados_cliente)
+                    saldo = Transferencia.saldo(saldo)
                     opcao = Menu.opcao_digitada(opcao)
             else:
                 Menu.exibir_menu(dados_cliente)
@@ -271,7 +273,7 @@ while opcao != 0:
             Pagar_boleto.pagar_boleto(dados_cliente)
             opcao = Menu.opcao_digitada(opcao)
         elif opcao == 5:
-            Extrato.exibir_extrato(extrato)
+            Extrato.exibir_extrato(dados_cliente, extrato)
             opcao = Menu.opcao_digitada(opcao)
         elif opcao == 6:
             opcao_6_submenu_simular()

@@ -37,7 +37,7 @@ class Transferencia:
             print("SALDO ATUAL:", "{0:.2f}".format(round(saldo,2)))
             print("PRESSIONE ENTER PARA CONTINUAR...")
             enter = str(input())
-            opcao = 3
+            return saldo
             Menu.opcao_3_submenu()
 
     def opcao_3_submenu_opcao_2(dados_cliente):
@@ -84,5 +84,5 @@ class Transferencia:
                 print("SALDO ATUAL:", "{0:.2f}".format(round(saldo,2)))
                 print("PRESSIONE ENTER PARA CONTINUAR...")
                 enter = str(input())
-                opcao = 3
+                return saldo
                 Menu.opcao_3_submenu()
