@@ -1,7 +1,7 @@
 import random
 
 class Cliente:
-    def __init__(self, nome, cpf, saldo):
+    def __init__(self, nome, cpf, saldo, valor_limite_disponivel):
         self.nome = nome
         self.cpf = cpf
         self.saldo = saldo
@@ -10,3 +10,4 @@ class Cliente:
         self.digito = random.randrange (1,9)
         self.conta_aberta = False
         self.valor_limite_disponivel = 0
+        self.contrato_ativo = False

@@ -18,7 +18,7 @@ class Pagar_boleto:
             print("PRESSIONE ENTER PARA CONTINUAR...")
             enter = str(input())
             Menu.exibir_menu(dados_cliente)
-            opcao = Opcao_digitada.opcao_digitada(opcao)
+            opcao = Opcao_digitada.opcao_digitada()
         else:
             print("PAGAMENTO REALIZADO COM SUCESSO")
             saldo = dados_cliente.saldo - valor_transacao
@@ -26,8 +26,7 @@ class Pagar_boleto:
             sinal_transacao = "-"
             valor_transacao_str = str(valor_transacao)
             descricao_extrato = data_transacao + "|" + sinal_transacao + valor_transacao_str + "|" + "PAGAMENTO DE BOLETO, CEDENTE: " + cedente
-            extrato.append(descricao_extrato)
             print("SALDO ATUAL:", "{0:.2f}".format(round(saldo,2)))
             print("PRESSIONE ENTER PARA CONTINUAR...")
             enter = str(input())
-            Menu.exibir_menu(dados_cliente)
+            return saldo, descricao_extrato
