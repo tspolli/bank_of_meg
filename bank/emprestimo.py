@@ -21,9 +21,6 @@ class Emprestimo:
                 print("OPCAO INVALIDA")
                 Menu.opcao_6_submenu_simular(dados_cliente.contrato_ativo)
                 Menu.opcao_digitada()
-        else:
-            Menu.exibir_menu(dados_cliente)
-            opcao = Menu.opcao_digitada()
             
     def simular_emprestimo_efetivar(dados_cliente, valor_transacao):
         Menu.opcao_6_submenu_efetivar()
@@ -38,6 +35,7 @@ class Emprestimo:
                 dados_cliente.saldo = a[0]
                 dados_cliente.valor_limite_disponivel = a[2].valor_limite_disponivel
                 extrato.append(a[1])
+                Extrato.__contratos__.append(a[1])
                 return 0
             elif opcao == 2:
                 return 1

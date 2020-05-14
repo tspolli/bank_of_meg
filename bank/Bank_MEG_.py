@@ -140,6 +140,8 @@ while opcao != 0:
             Menu.opcao_6_submenu_simular(dados_cliente)
             opcao = Menu.opcao_digitada()
             a = Emprestimo.validar_opcao_simular(opcao, dados_cliente, taxa_juros)
+            Menu.exibir_menu(dados_cliente)
+            opcao = Menu.opcao_digitada()
     else:
         print("CONTA AINDA NÃO FOI ABERTA")
         print("PRESSIONE ENTER PARA CONTINUAR...")

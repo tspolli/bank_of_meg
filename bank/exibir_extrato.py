@@ -1,5 +1,7 @@
 class Extrato:
+    __contratos__ = []
     def exibir_extrato(extrato):
+        extrato.append(__contratos__)
         if  extrato:
             print (*extrato, sep= "\n")
             print("PRESSIONE ENTER PARA CONTINUAR...")
