@@ -1,9 +1,9 @@
 class Extrato:
-    __contratos__ = []
-    def exibir_extrato(extrato):
-        extrato.append(__contratos__)
+    def exibir_extrato(extrato, extratoEmprestimo):
+        lista = []
+        lista = extrato + extratoEmprestimo
         if  extrato:
-            print (*extrato, sep= "\n")
+            print (*lista, sep= "\n")
             print("PRESSIONE ENTER PARA CONTINUAR...")
             enter = str(input())
         else:

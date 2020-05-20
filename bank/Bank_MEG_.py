@@ -10,6 +10,7 @@ from transferencia import Transferencia
 from pagar_boleto import Pagar_boleto
 from exibir_extrato import Extrato
 from emprestimo import Emprestimo
+from emprestimo import extratoEmprestimo
 
 opcao = int()
 nome = str()
@@ -133,7 +134,7 @@ while opcao != 0:
             Menu.exibir_menu(dados_cliente)
             opcao = Menu.opcao_digitada()
         elif opcao == 5:
-            Extrato.exibir_extrato(extrato)
+            Extrato.exibir_extrato(extrato, extratoEmprestimo)
             Menu.exibir_menu(dados_cliente)
             opcao = Menu.opcao_digitada()
         elif opcao == 6:

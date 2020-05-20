@@ -2,7 +2,7 @@ import time
 from menu import Menu
 from exibir_extrato import Extrato
 
-extrato = []
+extratoEmprestimo = []
 
 class Emprestimo:
     def validar_opcao_simular(opcao, dados_cliente, taxa_juros):
@@ -14,7 +14,7 @@ class Emprestimo:
                     a = Menu.opcao_6_submenu_simular(dados_cliente.contrato_ativo)
                     opcao = Menu.opcao_digitada()
             elif opcao == 2:
-                Extrato.contratos_ativos(extrato)
+                Extrato.contratos_ativos(extratoEmprestimo)
                 Menu.opcao_6_submenu_simular(dados_cliente.contrato_ativo)
                 opcao = Menu.opcao_digitada()
             else:
@@ -34,8 +34,7 @@ class Emprestimo:
                 a = Emprestimo.efetivar_emprestimo(dados_cliente, valor_transacao)
                 dados_cliente.saldo = a[0]
                 dados_cliente.valor_limite_disponivel = a[2].valor_limite_disponivel
-                extrato.append(a[1])
-                Extrato.__contratos__.append(a[1])
+                extratoEmprestimo.append(a[1])
                 return 0
             elif opcao == 2:
                 return 1
